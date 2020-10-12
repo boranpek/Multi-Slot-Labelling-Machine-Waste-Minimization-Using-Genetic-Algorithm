@@ -35,9 +35,9 @@ public class Machine {
         this.slots = slots;
     }
 
-    public void run(int amount) {
+    public void run() {
         for (Product product: this.slots) {
-            product.incrementAmountOfProduct(amount);
+            product.incrementAmountOfProduct();
         }
     }
 
