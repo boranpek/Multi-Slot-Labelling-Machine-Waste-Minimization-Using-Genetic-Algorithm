@@ -26,17 +26,18 @@ public class Main {
 
         Population slotLists = new Population(true, 20);
 
-        Machine.setSlotList(slotLists.getBestSlotList());
 
-        Machine.run();
 
-        calculateTotalWaste();
 
-        /*
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
             slotLists = GeneticAlgorithm.evolveSlotLists(slotLists);
         } //This creates new populations with genetic algorithm 50 times
-        */
+
+        Machine.setSlotList(slotLists.getBestSlotList());
+
+        Machine.run(true);
+
+        calculateTotalWaste();
 
 
     }

@@ -30,39 +30,65 @@ public class Machine {
         Machine.slotList = slotlist;
     }
 
-    public static void run() {
-        int countProduced = 0;
+    public static int calculateTotalWaste() {
+        int[] waste = new int[ProductList.getProductsNumber()];
+        int totalWaste = 0;
+        for (int i = 0; i < ProductList.getProductsNumber(); i++) {
+            waste[i] = ProductList.getProducts().get(i).getAmountOfProduct() - ProductList.getProducts().get(i).getDemandOfProduct();
+            totalWaste = totalWaste + waste[i];
+        }
+
+        return totalWaste;
+    }
+
+    public static void run(boolean showSteps) {
         int[] countList = new int [numberOfSlotConfig];
+        boolean condition1 = true;
+        boolean condition2 = false;
+
         for(int i = 0; i < numberOfSlotConfig; i++){
-            countProduced = 0;
-            while (slotList.getSlots().get(i).get(0).getAmountOfProduct() < slotList.getSlots().get(i).get(0).getDemandOfProduct() && slotList.getSlots().get(i).get(1).getAmountOfProduct() < slotList.getSlots().get(i).get(1).getDemandOfProduct() && slotList.getSlots().get(i).get(2).getAmountOfProduct() < slotList.getSlots().get(i).get(2).getDemandOfProduct()) {
+            for (int j = 0; j < slotNumber; j++) {
+                condition1 = condition1 && slotList.getSlots().get(i).get(j).getAmountOfProduct() < slotList.getSlots().get(i).get(j).getDemandOfProduct();
+            }
+            while (condition1) {
                 for (Product product: slotList.getSlots().get(i)){
                     product.incrementAmountOfProduct();
                 }
-                countProduced++;
+                countList[i]++;
+                for (int j = 0; j < slotNumber; j++) {
+                    condition1 = condition1 && slotList.getSlots().get(i).get(j).getAmountOfProduct() < slotList.getSlots().get(i).get(j).getDemandOfProduct();
+                }
             }
-            countList[i] = countProduced;
         }
         for (int i = numberOfSlotConfig-1; i >= 0; i--){
-            while (slotList.getSlots().get(i).get(0).getAmountOfProduct() < slotList.getSlots().get(i).get(0).getDemandOfProduct() || slotList.getSlots().get(i).get(1).getAmountOfProduct() < slotList.getSlots().get(i).get(1).getDemandOfProduct() || slotList.getSlots().get(i).get(2).getAmountOfProduct() < slotList.getSlots().get(i).get(2).getDemandOfProduct()) {
+            for (int j = 0; j < slotNumber; j++) {
+                condition2 = condition2 || slotList.getSlots().get(i).get(j).getAmountOfProduct() < slotList.getSlots().get(i).get(j).getDemandOfProduct();
+            }
+            while (condition2) {
+                condition2 = false;
                 for (Product product: slotList.getSlots().get(i)) {
                     product.incrementAmountOfProduct();
                 }
                 countList[i]++;
+                for (int j = 0; j < slotNumber; j++) {
+                    condition2 = condition2 || slotList.getSlots().get(i).get(j).getAmountOfProduct() < slotList.getSlots().get(i).get(j).getDemandOfProduct();
+                }
             }
 
         }
 
-
-        for(int i = 0;i < numberOfSlotConfig;i++) {
-            System.out.println("At run " + (i+1) + ", " + countList[i] + " product produced in each slot.");
-            System.out.print("Slots: ");
-            for (Product product : slotList.getSlots().get(i)) {
-                System.out.print("Product " + (1 + product.getProductId()) + ", ");
+        if (showSteps) {
+            for(int i = 0;i < numberOfSlotConfig;i++) {
+                System.out.println("At run " + (i+1) + ", " + countList[i] + " product produced in each slot.");
+                System.out.print("Slots: ");
+                for (Product product : slotList.getSlots().get(i)) {
+                    System.out.print("Product " + (1 + product.getProductId()) + ", ");
+                }
+                System.out.println("");
+                System.out.println("-----------------------------------------------------------------------");
             }
-            System.out.println("");
-            System.out.println("-----------------------------------------------------------------------");
         }
+
     }
 
 }

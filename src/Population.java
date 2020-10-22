@@ -14,16 +14,39 @@ public class Population {
         }
     }
 
+    public SlotList[] getSlotLists() {
+        return slotLists;
+    }
+
     public void setSlotList(SlotList slotList, int index) {
         slotLists[index] = slotList;
     }
 
     public SlotList getBestSlotList() {
-        SlotList slotList = slotLists[0];
-        return slotList;
+        for (SlotList slotList : slotLists) {
+            Machine.setSlotList(slotList);
+            Machine.run(false);
+            slotList.setWaste(Machine.calculateTotalWaste());
+            resetAmountOfProducts();
+        }
+        int min = 99999;
+        SlotList bestSlotList = new SlotList();
+        for (SlotList slotList : slotLists) {
+            if (slotList.getWaste() < min) {
+                min = slotList.getWaste();
+                bestSlotList = slotList;
+            }
+        }
+        return  bestSlotList;
     }
 
     public void addSlotList(int index, SlotList slotList) {
         slotLists[index] = slotList;
+    }
+
+    public void resetAmountOfProducts() {
+        for (Product product : ProductList.getProducts()) {
+            product.setAmountOfProduct(0);
+        }
     }
 }
