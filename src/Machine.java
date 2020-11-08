@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import ilog.concert.*;
+import ilog.cplex.*;
+
 
 public class Machine {
     private static int slotNumber;
@@ -88,7 +91,126 @@ public class Machine {
                 System.out.println("-----------------------------------------------------------------------");
             }
         }
+    }
+
+    public static void runCplex(boolean showSteps) {
+        int[] demands = new int[ProductList.getProductsNumber()];
+        int totalDemand = 0;
+        for (int i = 0; i < ProductList.getProductsNumber();i++) {
+            demands[i] = ProductList.getProducts().get(i).getDemandOfProduct();
+            totalDemand = totalDemand + demands[i];
+        }
+
+        int[][][] x = new int[ProductList.getProductsNumber()][getSlotNumber()][getNumberOfSlotConfig()];
+        for (int i = 0; i < ProductList.getProductsNumber();i++) {
+            for (int j = 0; j < getSlotNumber(); j++) {
+                for (int k = 0; k < getNumberOfSlotConfig(); k++) {
+                    x[i][j][k] = 0;
+                }
+            }
+        }
+
+        for (int i = 0; i < getNumberOfSlotConfig(); i++) {
+            for (int j = 0; j < getSlotNumber();j++) {
+                x[slotList.getSlots().get(i).get(j).getProductId()][j][i] = Integer.MAX_VALUE;
+            }
+        }
+
+        try {
+            // cplex environment
+            IloCplex cplex = new IloCplex();
+
+            // decision variable
+            IloNumVar[][][] y = new IloNumVar[ProductList.getProductsNumber()][getSlotNumber()][getNumberOfSlotConfig()];
+
+            for (int i = 0;i < ProductList.getProductsNumber();i++) {
+                for (int j = 0;j < Machine.getSlotNumber();j++) {
+                    for (int k = 0;k < Machine.getNumberOfSlotConfig();k++) {
+                        y[i][j][k] = cplex.intVar(0,Integer.MAX_VALUE);
+                    }
+                }
+            }
+            // expressions
+            IloLinearNumExpr[] totalProduced = new IloLinearNumExpr[ProductList.getProductsNumber()];
+            for (int i = 0; i < ProductList.getProductsNumber();i++) {
+                totalProduced[i] = cplex.linearNumExpr();
+                for (int j = 0;j < getSlotNumber();j++) {
+                    for (int k = 0;k < getNumberOfSlotConfig();k++) {
+                        totalProduced[i].addTerm(1,y[i][j][k]);
+                    }
+                }
+            }
+
+            IloLinearNumExpr[][] slotEquality = new IloLinearNumExpr[getSlotNumber()][getNumberOfSlotConfig()];
+            IloLinearNumExpr[][] slotEquality2 = new IloLinearNumExpr[getSlotNumber()][getNumberOfSlotConfig()];
+            for(int j = 0; j < getSlotNumber();j++) {
+                for (int k = 0;k < getNumberOfSlotConfig();k++) {
+                    slotEquality[j][k] = cplex.linearNumExpr();
+                    slotEquality2[j][k] = cplex.linearNumExpr();
+                    for(int i = 0;i < ProductList.getProductsNumber();i++) {
+                        slotEquality[j][k].addTerm(1,y[i][j][k]);
+                        slotEquality2[j][k].addTerm(1,y[i][1][k]);
+                    }
+                }
+            }
+            // constraints
+                //connection
+            for (int i = 0; i < ProductList.getProductsNumber();i++) {
+                for (int j = 0; j < getSlotNumber(); j++) {
+                    for (int k = 0; k < getNumberOfSlotConfig();k++) {
+                        cplex.addGe(x[i][j][k], y[i][j][k]);
+                    }
+                }
+            }
+
+                //greater then demand
+            for(int i = 0;i < ProductList.getProductsNumber();i++) {
+                cplex.addGe(totalProduced[i],demands[i]);
+            }
+                //slot equality
+            for (int j = 0;j < getSlotNumber();j++) {
+                for (int k = 0;k < getNumberOfSlotConfig();k++) {
+                    cplex.addEq(slotEquality[j][k],slotEquality2[j][k]);
+                }
+            }
+            // objective
+            IloLinearNumExpr objective = cplex.linearNumExpr();
+
+            for (int i = 0;i < ProductList.getProductsNumber();i++) {
+                for (int j = 0;j < getSlotNumber();j++) {
+                    for (int k = 0; k < getNumberOfSlotConfig();k++) {
+                        objective.addTerm(1,y[i][j][k]);
+                    }
+                }
+            }
+            cplex.addMinimize(objective);
+            // solution
+            if (cplex.solve()) {
+                int waste = (int)cplex.getObjValue() - totalDemand;
+                slotList.setWaste(waste);
+
+                if (showSteps) {
+                    for (int k = 0; k < getNumberOfSlotConfig(); k++) {
+                        System.out.println("At run: " + (k+1));
+                        System.out.println("--------");
+                        for(int j = 0; j < getSlotNumber(); j++) {
+                            System.out.println("Slot " + (j+1) + ": Product " + (slotList.getSlots().get(k).get(j).getProductId()+1));
+                        }
+                        System.out.println("------------------");
+                    }
+                    System.out.println("Total waste = " + waste);
+                }
+            }
+            else {
+                System.out.println("Problem is not solved");
+            }
+        }
+        catch (IloException e) {
+            e.printStackTrace();
+        }
+
 
     }
+
 
 }

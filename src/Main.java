@@ -1,3 +1,5 @@
+import javax.crypto.Mac;
+import javax.crypto.MacSpi;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.io.File;
@@ -24,20 +26,17 @@ public class Main {
             productId++;
         }
 
-        Population slotLists = new Population(true, 20);
+        Population slotLists = new Population(true, 50);
 
-
-
-
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             slotLists = GeneticAlgorithm.evolveSlotLists(slotLists);
-        } //This creates new populations with genetic algorithm 50 times
+        }
 
         Machine.setSlotList(slotLists.getBestSlotList());
 
-        Machine.run(true);
+        Machine.runCplex(true);
 
-        calculateTotalWaste();
+        //calculateTotalWaste();
 
 
     }
@@ -45,6 +44,7 @@ public class Main {
     static private void calculateTotalWaste() {
         int[] waste = new int[ProductList.getProductsNumber()];
         int totalWaste = 0;
+        int producedProduct = 0;
         for (int i = 0; i < ProductList.getProductsNumber(); i++) {
             waste[i] = ProductList.getProducts().get(i).getAmountOfProduct() - ProductList.getProducts().get(i).getDemandOfProduct();
             System.out.println("Product " + (i+1) + " demand: " + ProductList.getProducts().get(i).getDemandOfProduct() + " ,produced: " + ProductList.getProducts().get(i).getAmountOfProduct() + " waste: " + waste[i]);

@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GeneticAlgorithm {
-    private static final int tournamentSize = 5;
+    private static int tournamentSize = 5;
 
     public static Population evolveSlotLists(Population slotLists) {
-        Population evolvedSlotLists = new Population(false,20);
-        for (int i = 0; i < 20; i++){
+        Population evolvedSlotLists = new Population(false,50);
+        for (int i = 0; i < 50; i++){
             SlotList parent1 =  tournamentSelection(slotLists);//this selects randomly slotList from slotLists(population) by the tournamentSize then return the best one(slotList which has lowest waste)
             SlotList parent2 =  tournamentSelection(slotLists);
             SlotList child = crossingOver(parent1, parent2); // this creates new slotList which is combination of 2 parents
@@ -21,7 +21,7 @@ public class GeneticAlgorithm {
         Population selectedSlotLists = new Population(false, tournamentSize);
         Random rand = new Random();
         for (int i = 0; i < tournamentSize; i++) {
-            selectedSlotLists.addSlotList(i,slotLists.getSlotLists()[rand.nextInt(20)]);
+            selectedSlotLists.addSlotList(i,slotLists.getSlotLists()[rand.nextInt(50)]);
         }
 
         return selectedSlotLists.getBestSlotList();
@@ -37,7 +37,6 @@ public class GeneticAlgorithm {
             for (int i = 0; i < Machine.getNumberOfSlotConfig(); i++) {
                 crossedSlotList.getSlots().get(i).clear();
             }
-
 
             int randomRunNumber1 = rand.nextInt(Machine.getNumberOfSlotConfig());
             int randomSlotNumber1 = rand.nextInt(Machine.getSlotNumber());
@@ -64,8 +63,8 @@ public class GeneticAlgorithm {
                 }
             }
 
-            for (int i = lowerRunNumber; i < upperRunNumber; i++ ) {
-                for (int j = lowerSlotNumber; j < upperSlotNumber; j++) {
+            for (int i = lowerRunNumber; i < (1 + upperRunNumber); i++ ) {
+                for (int j = lowerSlotNumber; j < (1 + upperSlotNumber); j++) {
                     crossedSlotList.getSlots().get(i).set(j,parent1.getSlots().get(i).get(j));
                 }
             }
@@ -104,5 +103,7 @@ public class GeneticAlgorithm {
 
         child.getSlots().get(randomRunNumber2).set(randomSlotNumber2, product1);
         child.getSlots().get(randomRunNumber).set(randomSlotNumber, product2);
+
+
     }
 }
