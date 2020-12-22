@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1907b549-29a2-422a-93a6-4a6e380de381" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/cplex.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/poi_3_9.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ie401.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ie401.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ie401/GeneticAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ie401/GeneticAlgorithm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ie401/Machine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ie401/Machine.class" afterDir="false" />
@@ -13,11 +14,15 @@
       <change beforePath="$PROJECT_DIR$/src/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Machine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Population.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Population.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,6 +42,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -44,7 +50,13 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -63,6 +75,18 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -89,7 +113,31 @@
       <workItem from="1603634785160" duration="3544000" />
       <workItem from="1603719090129" duration="2134000" />
       <workItem from="1604728553214" duration="13615000" />
-      <workItem from="1604855557738" duration="1060000" />
+      <workItem from="1604855557738" duration="1533000" />
+      <workItem from="1604928851859" duration="2192000" />
+      <workItem from="1604998227697" duration="305000" />
+      <workItem from="1604998904561" duration="10948000" />
+      <workItem from="1605074474223" duration="269000" />
+      <workItem from="1605074879958" duration="460000" />
+      <workItem from="1605076122598" duration="8607000" />
+      <workItem from="1605334528727" duration="4439000" />
+      <workItem from="1605350342921" duration="2928000" />
+      <workItem from="1605427541074" duration="47000" />
+      <workItem from="1605427637855" duration="4652000" />
+      <workItem from="1605533091521" duration="4103000" />
+      <workItem from="1605592590126" duration="3464000" />
+      <workItem from="1605598636768" duration="1034000" />
+      <workItem from="1605681553906" duration="893000" />
+      <workItem from="1605682576789" duration="427000" />
+      <workItem from="1605683023635" duration="151000" />
+      <workItem from="1605683319348" duration="537000" />
+      <workItem from="1605683964181" duration="4344000" />
+      <workItem from="1605722960575" duration="1647000" />
+      <workItem from="1605773701487" duration="227000" />
+      <workItem from="1605774028072" duration="2355000" />
+      <workItem from="1606567509335" duration="9714000" />
+      <workItem from="1607179771859" duration="4000000" />
+      <workItem from="1607267122920" duration="1092000" />
     </task>
     <servers />
   </component>
@@ -97,44 +145,53 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="104" y="48" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605427563474">
+      <screen x="0" y="23" width="1280" height="726" />
+    </state>
+    <state x="104" y="48" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1280.726@0.23.1280.726" timestamp="1605427563474" />
     <state x="453" y="121" key="#com.intellij.ide.util.MemberChooser" timestamp="1603351259622">
       <screen x="0" y="23" width="1280" height="726" />
     </state>
     <state x="453" y="108" key="#com.intellij.ide.util.MemberChooser/0.0.1280.800@0.0.1280.800" timestamp="1602486458891" />
     <state x="453" y="121" key="#com.intellij.ide.util.MemberChooser/0.23.1280.726@0.23.1280.726" timestamp="1603351259622" />
+    <state x="377" y="177" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1605427560404">
+      <screen x="0" y="23" width="1280" height="726" />
+    </state>
+    <state x="377" y="177" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1280.726@0.23.1280.726" timestamp="1605427560404" />
     <state x="489" y="296" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1602479837409">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="489" y="296" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1280.800@0.0.1280.800" timestamp="1602479837409" />
-    <state width="1238" height="166" key="GridCell.Tab.0.bottom" timestamp="1604856080013">
-      <screen x="0" y="23" width="1280" height="726" />
+    <state width="1238" height="180" key="GridCell.Tab.0.bottom" timestamp="1607183947229">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="254" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1602508269710" />
-    <state width="1238" height="166" key="GridCell.Tab.0.bottom/0.23.1280.726@0.23.1280.726" timestamp="1604856080013" />
-    <state width="1238" height="166" key="GridCell.Tab.0.center" timestamp="1604856080011">
-      <screen x="0" y="23" width="1280" height="726" />
+    <state width="1238" height="180" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1607183947229" />
+    <state width="1238" height="173" key="GridCell.Tab.0.bottom/0.23.1280.726@0.23.1280.726" timestamp="1607180565476" />
+    <state width="1238" height="180" key="GridCell.Tab.0.center" timestamp="1607183947228">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="254" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1602508269707" />
-    <state width="1238" height="166" key="GridCell.Tab.0.center/0.23.1280.726@0.23.1280.726" timestamp="1604856080011" />
-    <state width="1238" height="166" key="GridCell.Tab.0.left" timestamp="1604856080010">
-      <screen x="0" y="23" width="1280" height="726" />
+    <state width="1238" height="180" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1607183947228" />
+    <state width="1238" height="173" key="GridCell.Tab.0.center/0.23.1280.726@0.23.1280.726" timestamp="1607180565475" />
+    <state width="1238" height="180" key="GridCell.Tab.0.left" timestamp="1607183947227">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="254" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1602508269705" />
-    <state width="1238" height="166" key="GridCell.Tab.0.left/0.23.1280.726@0.23.1280.726" timestamp="1604856080010" />
-    <state width="1238" height="166" key="GridCell.Tab.0.right" timestamp="1604856080012">
-      <screen x="0" y="23" width="1280" height="726" />
+    <state width="1238" height="180" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1607183947227" />
+    <state width="1238" height="173" key="GridCell.Tab.0.left/0.23.1280.726@0.23.1280.726" timestamp="1607180565474" />
+    <state width="1238" height="180" key="GridCell.Tab.0.right" timestamp="1607183947228">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="254" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1602508269708" />
-    <state width="1238" height="166" key="GridCell.Tab.0.right/0.23.1280.726@0.23.1280.726" timestamp="1604856080012" />
-    <state x="128" y="23" key="SettingsEditor" timestamp="1604731684964">
-      <screen x="0" y="23" width="1280" height="726" />
+    <state width="1238" height="180" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1607183947228" />
+    <state width="1238" height="173" key="GridCell.Tab.0.right/0.23.1280.726@0.23.1280.726" timestamp="1607180565475" />
+    <state x="128" y="23" width="1024" height="726" key="SettingsEditor" timestamp="1607338481123">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="128" y="23" key="SettingsEditor/0.23.1280.726@0.23.1280.726" timestamp="1604731684964" />
-    <state x="317" y="232" key="com.intellij.ide.util.TipDialog" timestamp="1604855558576">
-      <screen x="0" y="23" width="1280" height="726" />
+    <state x="128" y="23" width="1024" height="726" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1607338481123" />
+    <state x="128" y="23" key="SettingsEditor/0.23.1280.726@0.23.1280.726" timestamp="1605594758966" />
+    <state x="0" y="23" key="com.intellij.ide.util.TipDialog" timestamp="1607267165001">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="317" y="230" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1602507738266" />
-    <state x="317" y="232" key="com.intellij.ide.util.TipDialog/0.23.1280.726@0.23.1280.726" timestamp="1604855558576" />
+    <state x="0" y="23" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1607267165001" />
+    <state x="0" y="23" key="com.intellij.ide.util.TipDialog/0.23.1280.726@0.23.1280.726" timestamp="1607179772878" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ie401$Main.ic" NAME="Main Coverage Results" MODIFIED="1603176849596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

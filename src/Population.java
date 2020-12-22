@@ -25,9 +25,9 @@ public class Population {
     public SlotList getBestSlotList() {
         for (SlotList slotList : slotLists) {
             Machine.setSlotList(slotList);
-            Machine.runCplex(false);
-            //slotList.setWaste(Machine.calculateTotalWaste());
-            //resetAmountOfProducts();
+            Machine.run(false);
+            slotList.setWaste(Machine.calculateTotalWaste());
+            resetAmountOfProducts();
         }
         int min = 999999;
         SlotList bestSlotList = new SlotList();

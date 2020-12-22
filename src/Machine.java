@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import ilog.concert.*;
-import ilog.cplex.*;
+/*import ilog.concert.IloException;
+import ilog.concert.IloLinearNumExpr;
+import ilog.concert.IloNumVar;
+import ilog.cplex.IloCplex;*/ // this part for cplex
 
 
 public class Machine {
@@ -49,6 +50,40 @@ public class Machine {
         boolean condition1 = true;
         boolean condition2 = false;
 
+        int[] countProducts = new int[ProductList.getProductsNumber()];
+        int[] runIndexes = new int[ProductList.getProductsNumber()];
+
+        int[][] runIndexesForCondition2 = new int[numberOfSlotConfig][ProductList.getProductsNumber()];
+        int[] max = new int[ProductList.getProductsNumber()];
+        for (int i = 0;i < ProductList.getProductsNumber();i++) {
+            max[i] = 0;
+        }
+        int[] runIndexForMax = new int[ProductList.getProductsNumber()];
+
+        //1st step
+        for(int i = 0; i < Machine.getNumberOfSlotConfig(); i++){
+            for (int j = 0; j < Machine.getSlotNumber(); j++){
+                for (Product product : ProductList.getProducts()) {
+                    if (product.getProductId() == slotList.getSlots().get(i).get(j).getProductId()) {
+                        countProducts[product.getProductId()]++;
+                        runIndexes[product.getProductId()] = i;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < ProductList.getProductsNumber(); i++) {
+            if (countProducts[i] == 1 && ProductList.getProducts().get(i).getAmountOfProduct() < ProductList.getProducts().get(i).getDemandOfProduct()) {
+                while (ProductList.getProducts().get(i).getAmountOfProduct() < ProductList.getProducts().get(i).getDemandOfProduct()) {
+                    for (Product product : slotList.getSlots().get(runIndexes[i])) {
+                        product.incrementAmountOfProduct();
+                    }
+                    countList[runIndexes[i]]++;
+                }
+            }
+        }
+
+        //2nd step
         for(int i = 0; i < numberOfSlotConfig; i++){
             for (int j = 0; j < slotNumber; j++) {
                 condition1 = condition1 && slotList.getSlots().get(i).get(j).getAmountOfProduct() < slotList.getSlots().get(i).get(j).getDemandOfProduct();
@@ -62,7 +97,40 @@ public class Machine {
                     condition1 = condition1 && slotList.getSlots().get(i).get(j).getAmountOfProduct() < slotList.getSlots().get(i).get(j).getDemandOfProduct();
                 }
             }
+            condition1 = true;
         }
+
+        //3rd step
+
+        for (int i = 0;i < numberOfSlotConfig; i++) {
+            for (int j = 0; j < slotNumber; j++) {
+                if(slotList.getSlots().get(i).get(j).getAmountOfProduct() < slotList.getSlots().get(i).get(j).getDemandOfProduct()) {
+                    runIndexesForCondition2[i][slotList.getSlots().get(i).get(j).getProductId()]++;
+                }
+            }
+        }
+
+        for(int i = 0;i < numberOfSlotConfig;i++) {
+            for (int j = 0; j < ProductList.getProductsNumber();j++) {
+                if (runIndexesForCondition2[i][j] > max[j]) {
+                    max[j] = runIndexesForCondition2[i][j];
+                    runIndexForMax[j] = i;
+                }
+            }
+        }
+
+        for (int i = 0;i < ProductList.getProductsNumber();i++) {
+            if (max[i] > 0) {
+                while (ProductList.getProducts().get(i).getAmountOfProduct() < ProductList.getProducts().get(i).getDemandOfProduct()) {
+                    for (Product product : slotList.getSlots().get(runIndexForMax[i])) {
+                        product.incrementAmountOfProduct();
+                    }
+                    countList[runIndexForMax[i]]++;
+                }
+            }
+        }
+
+        //4th step
         for (int i = numberOfSlotConfig-1; i >= 0; i--){
             for (int j = 0; j < slotNumber; j++) {
                 condition2 = condition2 || slotList.getSlots().get(i).get(j).getAmountOfProduct() < slotList.getSlots().get(i).get(j).getDemandOfProduct();
@@ -93,7 +161,7 @@ public class Machine {
         }
     }
 
-    public static void runCplex(boolean showSteps) {
+  /*  public static void runCplex(boolean showSteps) {
         int[] demands = new int[ProductList.getProductsNumber()];
         int totalDemand = 0;
         for (int i = 0; i < ProductList.getProductsNumber();i++) {
@@ -210,7 +278,7 @@ public class Machine {
         }
 
 
-    }
+    }*/
 
 
 }
